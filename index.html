@@ -2,11 +2,10 @@
   function redirigir() {
     const ahora = new Date();
 
-    // Obtener la hora UTC y convertirla a hora de Venezuela (UTC -4)
+    // Ajustar hora manualmente a UTC-4 (hora de Venezuela)
     const horaUTC = ahora.getUTCHours();
-    const horaVenezuela = (horaUTC - 4 + 24) % 24;
+    const horaVenezuela = (horaUTC + 20) % 24; // +20 equivale a -4 con módulo 24
 
-    // Calcular el bloque de 2 horas
     const bloque = Math.floor(horaVenezuela / 2);
 
     const grupos = {
@@ -20,8 +19,8 @@
       7: "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK", // 2–4 p.m. - Grupo 3
       8: "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ", // 4–6 p.m. - Grupo 4
       9: "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC", // 6–8 p.m. - Grupo 5
-      10: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // 8–10 p.m. - Grupo 1 (ajustado)
-      11: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V"  // 10–12 p.m. - Grupo 2 (ajustado)
+      10: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // 8–10 p.m. - Grupo 1
+      11: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V"  // 10–12 p.m. - Grupo 2
     };
 
     const enlace = grupos[bloque] || grupos[0];
