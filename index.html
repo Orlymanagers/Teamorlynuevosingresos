@@ -12,16 +12,16 @@
       let grupoLink = "";
 
       // Horarios por grupo (intervalos de 2 horas):
-      //
-      // Grupo 1 (Orly) 
+
+      // Grupo 1 (Orly)
       // 12:00 a.m. – 2:00 a.m. → 0
       // 10:00 a.m. – 12:00 p.m. → 10
-      // 12:00 a.m. – 2:00 a.m. (repetido) → 0 (ya cubierto)
-      if ([0, 10].includes(venezuelaHour)) {
+      // 8:00 p.m. – 10:00 p.m. → 20
+      if ([0, 10, 20].includes(venezuelaHour)) {
         grupoLink = "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47";
       }
 
-      // Grupo 2 (Estrella) 
+      // Grupo 2 (Estrella)
       // 2:00 a.m. – 4:00 a.m. → 2
       // 12:00 p.m. – 2:00 p.m. → 12
       // 10:00 p.m. – 12:00 a.m. → 22
@@ -29,28 +29,28 @@
         grupoLink = "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V";
       }
 
-      // Grupo 3 (Gabriel) 
+      // Grupo 3 (Gabriel)
       // 4:00 a.m. – 6:00 a.m. → 4
       // 2:00 p.m. – 4:00 p.m. → 14
       else if ([4, 14].includes(venezuelaHour)) {
         grupoLink = "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK";
       }
 
-      // Grupo 4 (Zuim) 
+      // Grupo 4 (Zuim)
       // 6:00 a.m. – 8:00 a.m. → 6
       // 4:00 p.m. – 6:00 p.m. → 16
       else if ([6, 16].includes(venezuelaHour)) {
         grupoLink = "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ";
       }
 
-      // Grupo 5 (Rebe) 
+      // Grupo 5 (Rebe)
       // 8:00 a.m. – 10:00 a.m. → 8
       // 6:00 p.m. – 8:00 p.m. → 18
       else if ([8, 18].includes(venezuelaHour)) {
         grupoLink = "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC";
       }
 
-      // Por defecto, redirige al Grupo 1
+      // Por defecto: Grupo 1
       else {
         grupoLink = "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47";
       }
