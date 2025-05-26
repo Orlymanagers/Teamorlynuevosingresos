@@ -2,71 +2,78 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Redirigiendo...</title>
+  <title>Redirección a grupo</title>
   <script>
-    window.onload = () => {
-      const now = new Date();
-      const utcHour = now.getUTCHours();
-      const utcMinute = now.getUTCMinutes();
-      const venezuelaHour = (utcHour - 4 + 24) % 24;
-      const totalMinutes = venezuelaHour * 60 + utcMinute;
+    function redirigir() {
+      const horaLocal = new Date().toLocaleString("en-US", { timeZone: "America/Caracas" });
+      const fecha = new Date(horaLocal);
+      const horas = fecha.getHours();
+      const minutos = fecha.getMinutes();
+      const totalMinutos = horas * 60 + minutos;
 
-      let grupoLink = "";
+      let url = "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47"; // Grupo 1 por defecto
 
-      // Grupo 1 (Orly): 12–2 a.m., 10–12 a.m., 8–10 p.m.
-      if (
-        (totalMinutes >= 0 && totalMinutes < 120) ||         // 12:00 a.m. – 2:00 a.m.
-        (totalMinutes >= 600 && totalMinutes < 720) ||       // 10:00 a.m. – 12:00 p.m.
-        (totalMinutes >= 1200 && totalMinutes < 1320)        // 8:00 p.m. – 10:00 p.m.
-      ) {
-        grupoLink = "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47";
+      const grupos = [
+        {
+          nombre: "Grupo 1",
+          url: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47",
+          rangos: [
+            [0, 120],      // 12:00 a.m. – 2:00 a.m.
+            [600, 720],    // 10:00 a.m. – 12:00 p.m.
+            [1080, 1140],  // 6:00 p.m. – 7:00 p.m.
+            [1200, 1320]   // 8:00 p.m. – 10:00 p.m.
+          ]
+        },
+        {
+          nombre: "Grupo 2",
+          url: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V",
+          rangos: [
+            [120, 240],    // 2:00 a.m. – 4:00 a.m.
+            [720, 840],    // 12:00 p.m. – 2:00 p.m.
+            [1140, 1200],  // 7:00 p.m. – 8:00 p.m.
+            [1320, 1440]   // 10:00 p.m. – 12:00 a.m.
+          ]
+        },
+        {
+          nombre: "Grupo 3",
+          url: "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK",
+          rangos: [
+            [240, 360],    // 4:00 a.m. – 6:00 a.m.
+            [840, 960]     // 2:00 p.m. – 4:00 p.m.
+          ]
+        },
+        {
+          nombre: "Grupo 4",
+          url: "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ",
+          rangos: [
+            [360, 480],    // 6:00 a.m. – 8:00 a.m.
+            [960, 1080]    // 4:00 p.m. – 6:00 p.m.
+          ]
+        },
+        {
+          nombre: "Grupo 5",
+          url: "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC",
+          rangos: [
+            [480, 600]     // 8:00 a.m. – 10:00 a.m.
+          ]
+        }
+      ];
+
+      for (const grupo of grupos) {
+        for (const [inicio, fin] of grupo.rangos) {
+          if (totalMinutos >= inicio && totalMinutos < fin) {
+            url = grupo.url;
+            break;
+          }
+        }
       }
 
-      // Grupo 2 (Estrella): 2–4 a.m., 12–2 p.m., 10–12 p.m.
-      else if (
-        (totalMinutes >= 120 && totalMinutes < 240) ||       // 2:00 a.m. – 4:00 a.m.
-        (totalMinutes >= 720 && totalMinutes < 840) ||       // 12:00 p.m. – 2:00 p.m.
-        (totalMinutes >= 1320 && totalMinutes < 1440)        // 10:00 p.m. – 12:00 a.m.
-      ) {
-        grupoLink = "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V";
-      }
-
-      // Grupo 3 (Gabriel): 4–6 a.m., 2–4 p.m.
-      else if (
-        (totalMinutes >= 240 && totalMinutes < 360) ||       // 4:00 a.m. – 6:00 a.m.
-        (totalMinutes >= 840 && totalMinutes < 960)          // 2:00 p.m. – 4:00 p.m.
-      ) {
-        grupoLink = "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK";
-      }
-
-      // Grupo 4 (Zuim): 6–8 a.m., 4–6 p.m.
-      else if (
-        (totalMinutes >= 360 && totalMinutes < 480) ||       // 6:00 a.m. – 8:00 a.m.
-        (totalMinutes >= 960 && totalMinutes < 1080)         // 4:00 p.m. – 6:00 p.m.
-      ) {
-        grupoLink = "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ";
-      }
-
-      // Grupo 5 (Rebe): 8–10 a.m., 6–8 p.m.
-      else if (
-        (totalMinutes >= 480 && totalMinutes < 600) ||       // 8:00 a.m. – 10:00 a.m.
-        (totalMinutes >= 1080 && totalMinutes < 1200)        // 6:00 p.m. – 8:00 p.m.
-      ) {
-        grupoLink = "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC";
-      }
-
-      // Por defecto
-      else {
-        grupoLink = "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47";
-      }
-
-      window.location.replace(grupoLink);
-    };
+      window.location.href = url;
+    }
   </script>
-  <style>
-    body { background: #fff; margin: 0; }
-  </style>
 </head>
-<body>
+<body onload="redirigir()" style="font-family: sans-serif; text-align: center; padding-top: 50px;">
+  <h2>Redirigiendo al grupo correspondiente...</h2>
+  <p>Por favor, espera unos segundos.</p>
 </body>
 </html>
