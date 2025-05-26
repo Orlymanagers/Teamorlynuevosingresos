@@ -1,9 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Redirección por horario - Team Orly 👑</title>
-  <script>
+<script>
+  function redirigir() {
+    const ahora = new Date();
+
+    // Obtener la hora UTC (universal)
+    const horaUTC = ahora.getUTCHours();
+
+    // Restar 4 horas para convertir a hora de Venezuela (UTC-4)
+    const horaVenezuela = (horaUTC - 4 + 24) % 24;
+
+    // Calcular el bloque de 2 horas
+    const bloque = Math.floor(horaVenezuela / 2);
+
     const grupos = {
       0: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // 12-2 am - Grupo 1
       1: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V", // 2-4 am - Grupo 2
@@ -19,17 +26,9 @@
       11: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // 10-12 pm - Grupo 1
     };
 
-    function redirigir() {
-      const hora = new Date().getHours();
-      const bloque = Math.floor(hora / 2);
-      const url = grupos[bloque] || "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47"; // fallback
-      window.location.href = url;
-    }
+    const enlace = grupos[bloque] || grupos[0];
+    window.location.href = enlace;
+  }
 
-    window.onload = redirigir;
-  </script>
-</head>
-<body>
-  <h2>Redirigiendo al grupo correspondiente...</h2>
-</body>
-</html>
+  window.onload = redirigir;
+</script>
