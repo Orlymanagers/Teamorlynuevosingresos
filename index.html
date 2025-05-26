@@ -1,30 +1,39 @@
 <script>
   function redirigir() {
     const ahora = new Date();
-
-    // Ajustar hora manualmente a UTC-4 (hora de Venezuela)
     const horaUTC = ahora.getUTCHours();
-    const horaVenezuela = (horaUTC + 20) % 24; // +20 equivale a -4 con módulo 24
-
+    const horaVenezuela = (horaUTC + 20) % 24; // +20 = -4 con módulo 24
     const bloque = Math.floor(horaVenezuela / 2);
 
     const grupos = {
-      0: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // 12–2 a.m. - Grupo 1
-      1: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V", // 2–4 a.m. - Grupo 2
-      2: "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK", // 4–6 a.m. - Grupo 3
-      3: "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ", // 6–8 a.m. - Grupo 4
-      4: "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC", // 8–10 a.m. - Grupo 5
-      5: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // 10–12 a.m. - Grupo 1
-      6: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V", // 12–2 p.m. - Grupo 2
-      7: "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK", // 2–4 p.m. - Grupo 3
-      8: "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ", // 4–6 p.m. - Grupo 4
-      9: "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC", // 6–8 p.m. - Grupo 5
-      10: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // 8–10 p.m. - Grupo 1
-      11: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V"  // 10–12 p.m. - Grupo 2
+      0: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // Grupo 1
+      1: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V", // Grupo 2
+      2: "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK", // Grupo 3
+      3: "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ", // Grupo 4
+      4: "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC", // Grupo 5
+      5: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // Grupo 1
+      6: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V", // Grupo 2
+      7: "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK", // Grupo 3
+      8: "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ", // Grupo 4
+      9: "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC", // Grupo 5
+      10: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // Grupo 1 (ajustado)
+      11: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V"  // Grupo 2 (ajustado)
     };
 
-    const enlace = grupos[bloque] || grupos[0];
-    window.location.href = enlace;
+    const grupoActual = grupos[bloque] || grupos[0];
+
+    document.body.innerHTML = `
+      <h2>Redireccionando según horario de Venezuela...</h2>
+      <p><strong>Hora UTC:</strong> ${horaUTC}:00</p>
+      <p><strong>Hora Venezuela (UTC-4):</strong> ${horaVenezuela}:00</p>
+      <p><strong>Bloque:</strong> ${bloque} (cada bloque = 2 horas)</p>
+      <p><strong>Grupo destino:</strong> ${grupoActual}</p>
+      <p>Redirigiendo en 5 segundos...</p>
+    `;
+
+    setTimeout(() => {
+      window.location.href = grupoActual;
+    }, 5000);
   }
 
   window.onload = redirigir;
