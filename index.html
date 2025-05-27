@@ -2,78 +2,28 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Redirección a grupo</title>
+  <title>Redirigiendo...</title>
   <script>
-    function redirigir() {
-      const horaLocal = new Date().toLocaleString("en-US", { timeZone: "America/Caracas" });
-      const fecha = new Date(horaLocal);
-      const horas = fecha.getHours();
-      const minutos = fecha.getMinutes();
-      const totalMinutos = horas * 60 + minutos;
+    const grupos = [
+      "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // Grupo 1
+      "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V", // Grupo 2
+      "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK", // Grupo 3
+      "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ", // Grupo 4
+      "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC"  // Grupo 5
+    ];
 
-      let url = "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47"; // Grupo 1 por defecto
+    window.onload = () => {
+      let contador = localStorage.getItem('grupoSecuencia');
+      contador = contador ? parseInt(contador) : 0;
 
-      const grupos = [
-        {
-          nombre: "Grupo 1",
-          url: "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47",
-          rangos: [
-            [0, 120],      // 12:00 a.m. – 2:00 a.m.
-            [600, 720],    // 10:00 a.m. – 12:00 p.m.
-            [1080, 1140],  // 6:00 p.m. – 7:00 p.m.
-            [1200, 1320]   // 8:00 p.m. – 10:00 p.m.
-          ]
-        },
-        {
-          nombre: "Grupo 2",
-          url: "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V",
-          rangos: [
-            [120, 240],    // 2:00 a.m. – 4:00 a.m.
-            [720, 840],    // 12:00 p.m. – 2:00 p.m.
-            [1140, 1200],  // 7:00 p.m. – 8:00 p.m.
-            [1320, 1440]   // 10:00 p.m. – 12:00 a.m.
-          ]
-        },
-        {
-          nombre: "Grupo 3",
-          url: "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK",
-          rangos: [
-            [240, 360],    // 4:00 a.m. – 6:00 a.m.
-            [840, 960]     // 2:00 p.m. – 4:00 p.m.
-          ]
-        },
-        {
-          nombre: "Grupo 4",
-          url: "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ",
-          rangos: [
-            [360, 480],    // 6:00 a.m. – 8:00 a.m.
-            [960, 1080]    // 4:00 p.m. – 6:00 p.m.
-          ]
-        },
-        {
-          nombre: "Grupo 5",
-          url: "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC",
-          rangos: [
-            [480, 600]     // 8:00 a.m. – 10:00 a.m.
-          ]
-        }
-      ];
+      const destino = grupos[contador % grupos.length];
+      localStorage.setItem('grupoSecuencia', contador + 1);
 
-      for (const grupo of grupos) {
-        for (const [inicio, fin] of grupo.rangos) {
-          if (totalMinutos >= inicio && totalMinutos < fin) {
-            url = grupo.url;
-            break;
-          }
-        }
-      }
-
-      window.location.href = url;
-    }
+      window.location.href = destino;
+    };
   </script>
 </head>
-<body onload="redirigir()" style="font-family: sans-serif; text-align: center; padding-top: 50px;">
-  <h2>Redirigiendo al grupo correspondiente...</h2>
-  <p>Por favor, espera unos segundos.</p>
+<body>
+  <p style="text-align:center; font-family:sans-serif; margin-top:20%;">Redirigiendo al grupo correspondiente...</p>
 </body>
 </html>
