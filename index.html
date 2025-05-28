@@ -3,27 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirigiendo...</title>
-  <script>
-    const grupos = [
-      "https://chat.whatsapp.com/HsaBuLsrdPO4V21yjIQv47", // Grupo 1
-      "https://chat.whatsapp.com/LgnVlowLUYT9cZae0bEI5V", // Grupo 2
-      "https://chat.whatsapp.com/D4qSliHepxsEVmCFHm7fZK", // Grupo 3
-      "https://chat.whatsapp.com/KFm5iHFYDgdA5RJ7LXWddZ", // Grupo 4
-      "https://chat.whatsapp.com/Db2qc5V6ramIhAMh3eLcIC"  // Grupo 5
-    ];
-
-    window.onload = () => {
-      let contador = localStorage.getItem('grupoSecuencia');
-      contador = contador ? parseInt(contador) : 0;
-
-      const destino = grupos[contador % grupos.length];
-      localStorage.setItem('grupoSecuencia', contador + 1);
-
-      window.location.href = destino;
-    };
-  </script>
+  <meta http-equiv="refresh" content="0;URL='/api/redirigir'" />
 </head>
 <body>
-  <p style="text-align:center; font-family:sans-serif; margin-top:20%;">Redirigiendo al grupo correspondiente...</p>
+  <p style="text-align:center; font-family:sans-serif; margin-top:20%;">
+    Redirigiendo automáticamente...
+  </p>
 </body>
 </html>
